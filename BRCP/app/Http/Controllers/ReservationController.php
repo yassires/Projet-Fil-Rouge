@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Car;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 
@@ -20,9 +21,11 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        //
+
+        $car = Car::find($id);
+        return view('reservation.create', compact('car'));
     }
 
     /**
@@ -31,6 +34,22 @@ class ReservationController extends Controller
     public function store(StoreReservationRequest $request)
     {
         //
+        $this->validate($request, [
+            'user_id' => 'required',
+            'car_id' => 'required',
+            'rent_date_start' => 'required',
+            'rent_date_end' => 'required',
+        ]);
+        Reservation::create([
+            'user_id' => auth()->user()->id,
+            'car_id' => $request->car_id,
+            'rent_date_start' => $request->rent_date_start,
+            'rent_date_end' => $request->rent_date_end,
+            'price_rent' => 300,
+        ]);
+        return redirect()->route('cars.index')->with([
+            'success' => 'Reservation added successfully'
+        ]);
     }
 
     /**

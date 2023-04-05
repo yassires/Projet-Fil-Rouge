@@ -22,28 +22,29 @@
     </div>
     <div class="col-md-6">
         <div class="card border border-primary">
-            <h3 class="card-header">{{$car->brand}}</h3>
+            <h3 class="card-header">{{$car->Brand->name}}</h3>
+            
             <div class="card-body">
                     <div class="media mb-2">
                         <div class="media-middle">
-                            <img src="{{$car->image}}" class="img-fluid rounded-cercle" alt="" width="200px">
+                            <img src="{{asset($car->image)}}" class="img-fluid rounded-cercle" alt="" width="200px">
                             
                         </div>
                         <div class="madia-body">
                             <h3 class="text-info">
-                                <a href="{{route('cars.show',$car->id)}}" class="btn btn-link ">
+                                <a href="{{route('cars.show',$car->id)}}" class="btn">
                                     {{$car->name}}
                                 </a>
                             </h3>
                             <p class="d-flex flex-row justify-content-center align-items-center">
-                                <span class="badge bg-danger mx-1">category: {{$car->category}}</span>
+                                <span class="badge bg-danger mx-1">category: {{$car->Category->name}}</span>
                                 <span class="badge bg-primary mx-1">Price for Sell: {{$car->price_sell}}</span>
                                 <span class="badge bg-primary mx-2">Price for Rent: {{$car->price_rent}}</span>
                                 @if ($car->available)
                                     
                                     @auth
                                         <div>
-                                            <a href="#" class="btn btn-primary">
+                                            <a href="{{route('reservations.create',$car->id)}}" class="btn btn-primary">
                                                 To Book
                                             </a>
                                         </div>

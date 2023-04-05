@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use App\Models\Category;
 
 class CarController extends Controller
 {
@@ -13,12 +14,20 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::all();
-        $a_cars = Car::whereAvailable(1)->get();
+        $cars = Car::with('Brand','Category')->get();
+        // $a_cars = Car::whereAvailable(1)->get();
 
         return view('cars.index')->with([
-            'cars' => $cars
+            'cars' => $cars,
         ]);
+        // dd($cars);
+        // foreach($cars as $car){
+        //     echo $car->name;
+        //     echo $car->Brand->name;
+        //     echo '<br>';
+        // }
+
+    
     }
 
     /**

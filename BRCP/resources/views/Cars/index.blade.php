@@ -32,14 +32,14 @@
                         </div>
                         <div class="madia-body">
                             <h3 class="text-info">
-                                <a href="{{route('cars.show',$car->id)}}" class="btn btn-link ">
-                                    {{$car->name}}
+                                <a href="{{route('cars.show',$car->id)}}" class="btn">
+                                    {{$car->name}} | {{$car->Brand->name}}
                                 </a>
                             </h3>
                             <p class="d-flex flex-row justify-content-center align-items-center">
-                                <span class="badge bg-danger mx-1">category: {{$car->category}}</span>
-                                <span class="badge bg-primary mx-1">Price for Sell: {{$car->price_sell}}</span>
-                                <span class="badge bg-primary mx-2">Price for Rent: {{$car->price_rent}}</span>
+                                <span class="badge bg-danger mx-1">category: {{$car->Category->name}}</span>
+                                <span class="badge bg-primary mx-1">Price for Sell: {{$car->price_sell}} $</span>
+                                <span class="badge bg-primary mx-2">Price for Rent: {{$car->price_rent}} $</span>
                                 @if ($car->available)
                                     <span class="badge bg-success ">
                                     Available

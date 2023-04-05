@@ -23,13 +23,13 @@
                 </li>
                @auth
                     <li class="nav-item">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="{{route('dashboard')}}">
                         {{auth()->user()->name}}
                       </a>
                     </li>
                     <li class="nav-item">
-                      <form action="{{route('logout')}}"nmethod="post">
-                        <button type="submit" class="nav-link" >Logout</button>
+                      <form action="{{route('logout')}}" method="POST">
+                        <button  class="nav-link" >Logout</button>
                       </form>
                     </li>
                   @else

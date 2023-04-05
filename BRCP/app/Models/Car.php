@@ -9,4 +9,13 @@ class Car extends Model
 {
 
      protected $guarded = [];
+
+     public function Brand()
+     {
+          return $this->belongsTo(Brand::class, 'brand');
+     }
+     public function Category()
+     {
+          return $this->belongsTo(Category::class, 'category');
+     }
 }
