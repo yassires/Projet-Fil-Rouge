@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\Car;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use DateTime;
 
 class ReservationController extends Controller
 {
@@ -35,17 +36,27 @@ class ReservationController extends Controller
     {
         //
         $this->validate($request, [
-            'user_id' => 'required',
+            // 'user_id' => 'required',
             'car_id' => 'required',
             'rent_date_start' => 'required',
             'rent_date_end' => 'required',
         ]);
+        $car = Car::find($request->car_id);
+        $dateLocation = new DateTime($request->rent_date_start);
+        $dateRetour = new DateTime($request->rent_date_end);
+        $jours = date_diff($dateLocation, $dateRetour);
+        $prixTtc = $jours->format('%d');
+        dd($prixTtc);
         Reservation::create([
             'user_id' => auth()->user()->id,
             'car_id' => $request->car_id,
             'rent_date_start' => $request->rent_date_start,
             'rent_date_end' => $request->rent_date_end,
-            'price_rent' => 300,
+            'price_rent' => $prixTtc,
+        ]);
+
+        $car->update([
+            'available' => 0
         ]);
         return redirect()->route('cars.index')->with([
             'success' => 'Reservation added successfully'
