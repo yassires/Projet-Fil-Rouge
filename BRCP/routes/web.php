@@ -20,6 +20,7 @@ Route::get('/', [CarController::class, 'index']);
 Route::Resource('/cars', CarController::class);
 Route::Resource('/reservation', ReservationController::class);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
+Route::get('/user/{id}/profile', [ReservationController::class, 'show'])->name('users.profile');
 
 
 Route::middleware([

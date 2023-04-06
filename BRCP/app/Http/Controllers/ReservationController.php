@@ -45,8 +45,8 @@ class ReservationController extends Controller
         $dateLocation = new DateTime($request->rent_date_start);
         $dateRetour = new DateTime($request->rent_date_end);
         $jours = date_diff($dateLocation, $dateRetour);
-        $prixTtc = $jours->format('%d');
-        dd($prixTtc);
+        $prixTtc =$car->price_rent * $jours->format('%d');
+        
         Reservation::create([
             'user_id' => auth()->user()->id,
             'car_id' => $request->car_id,
