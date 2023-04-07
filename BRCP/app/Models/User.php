@@ -60,6 +60,6 @@ class User extends Authenticatable
     ];
 
     protected function Reservation() {
-        return $this->hasMany(Reservation::class)->order_by('created_at', 'DESC');
+        return $this->hasMany(Reservation::class)->orderBy('created_at', 'DESC');
     }
 }

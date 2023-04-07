@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\UsersController;
 use GuzzleHttp\Promise\Create;
 
 /*
@@ -20,7 +21,7 @@ Route::get('/', [CarController::class, 'index']);
 Route::Resource('/cars', CarController::class);
 Route::Resource('/reservation', ReservationController::class);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
-Route::get('/user/{id}/profile', [ReservationController::class, 'show'])->name('users.profile');
+Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.profile');
 
 
 Route::middleware([

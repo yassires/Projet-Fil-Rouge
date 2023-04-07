@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Car;
+use Illuminate\Support\Facades\Auth;
+use stdClass;
 
 class UsersController extends Controller
 {
@@ -34,10 +38,26 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
         //
-        return view('auth.show', compact('User'));
+        $id = Auth::user()->id;
+        $reservations = Reservation::where('user_id', $id)->get();
+        $cars = [];
+        foreach($reservations as $reservation){
+            $car = Car::where('id',$reservation->car_id )->first();
+            $obj = new stdClass();
+            $obj->id = $reservation->id;
+            $obj->pick_up_date = $reservation->rent_date_start;
+            $obj->drop_of_date = $reservation->rent_date_end;
+            $obj->price = $reservation->price_rent;
+            $obj->brand = $car->Brand->name;
+            $obj->category = $car->Category->name;
+
+            $cars[] = $obj;
+
+        }
+        return view('auth.show', compact('cars'));
     }
 
     /**
