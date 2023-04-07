@@ -27,6 +27,7 @@ Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.
 
 Route::middleware([
     'auth:sanctum',
+    'admin',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
@@ -34,3 +35,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+// Route::group(['middleware' => 'admin'], function () {
+//     Route::get('/dashboard', 'DashboardController@index');
+// });
