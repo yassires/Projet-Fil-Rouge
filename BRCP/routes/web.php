@@ -19,6 +19,7 @@ use GuzzleHttp\Promise\Create;
 
 Route::get('/', [CarController::class, 'index']);
 Route::Resource('/cars', CarController::class);
+Route::post('/cars', [CarController::class,'index'])->name('cars.index');
 Route::Resource('/reservation', ReservationController::class);
 Route::get('/reservation/{id}/create', [ReservationController::class, 'create'])->name('reservations.create');
 Route::get('/user/{id}/profile', [UsersController::class, 'show'])->name('users.profile');

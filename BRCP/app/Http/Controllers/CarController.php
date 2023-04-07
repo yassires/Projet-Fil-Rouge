@@ -6,26 +6,36 @@ use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::with('Brand','Category')->get();
-        // $a_cars = Car::whereAvailable(1)->get();
+        $cars = Car::with('Brand','Category')->paginate(5);
+        $a_cars = Car::whereAvailable(1)->get();
 
-        return view('cars.index')->with([
+        // if ($request->search !== null) {
+        //     $car = Car::where('brand', '=', $request->search)
+        //     ->orderByDesc('created_at')
+        //     ->get();
+        //     dd($car);
+        //     return view('cars.index')->with([
+        //         'cars' => $car,
+        //         'title' =>"Result found for : ".$request->search
+        //     ]);
+        // } else {
+             return view('cars.index')->with([
             'cars' => $cars,
+            'title' =>"All Cars"
         ]);
-        // dd($cars);
-        // foreach($cars as $car){
-        //     echo $car->name;
-        //     echo $car->Brand->name;
-        //     echo '<br>';
         // }
+        
+       
+        
 
     
     }

@@ -8,10 +8,11 @@
                 Search
             </h3>
             <div class="card-body">
-                <form action="#" method="POST">
+                <form action="{{route('cars.index')}}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <label for="Search">Search</label>
-                        <input type="text" name="search" id="" class="form-control" placeholder="Search...">
+                        <input type="text" name="search" id="" class="form-control my-2" placeholder="Search...">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -22,7 +23,7 @@
     </div>
     <div class="col-md-6">
         <div class="card border border-primary">
-            <h3 class="card-header">All Cars</h3>
+            <h3 class="card-header">{{$title}}</h3>
             <div class="card-body">
                 @foreach ($cars as $car)
                     <div class="media mb-2">
@@ -55,6 +56,9 @@
                     </div>
                     <hr>
                 @endforeach
+            </div>
+            <div class="d-flex justify-content-center">
+                {!! $cars->links() !!}
             </div>
         </div>
     </div>

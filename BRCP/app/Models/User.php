@@ -62,4 +62,9 @@ class User extends Authenticatable
     protected function Reservation() {
         return $this->hasMany(Reservation::class)->orderBy('created_at', 'DESC');
     }
+
+    public function isAdmin()
+    {
+        return $this->is_admin ? true : false;
+    }
 }

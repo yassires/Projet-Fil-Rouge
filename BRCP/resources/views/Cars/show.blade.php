@@ -38,8 +38,8 @@
                             </h3>
                             <p class="d-flex flex-row justify-content-center align-items-center">
                                 <span class="badge bg-danger mx-1">category: {{$car->Category->name}}</span>
-                                <span class="badge bg-primary mx-1">Price for Sell: {{$car->price_sell}}</span>
-                                <span class="badge bg-primary mx-2">Price for Rent: {{$car->price_rent}}</span>
+                                <span class="badge bg-primary mx-1">Price for Sell: {{$car->price_sell}} $</span>
+                                <span class="badge bg-primary mx-2">Price for Rent: {{$car->price_rent}} $</span>
                                 @if ($car->available)
                                     
                                     @auth
